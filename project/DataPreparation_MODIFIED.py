@@ -72,8 +72,8 @@ test_data = test_data.merge(user_mean_train, on='user_id', how='left').merge(mov
 
 
 # === 2 different set of features to drop
-cols_to_drop = ['item_id', 'movie_id', 'user_id', 'timestamp'] # Leaves 46 features
-# cols_to_drop = (full_data.iloc[:, 8:-1].columns).to_list() + ['item_id', 'movie_id', 'user_id', 'timestamp'] # dropping occupation, genres and useless data # Leaves 7 features
+# cols_to_drop = ['item_id', 'movie_id', 'user_id', 'timestamp'] # Leaves 46 features
+cols_to_drop = (full_data.iloc[:, 8:].columns).to_list() + ['item_id', 'movie_id', 'user_id', 'timestamp'] # dropping occupation, genres and useless data # Leaves 7 features
 # ---------------------------------------
 
 train_data = train_data.drop(cols_to_drop, axis=1)
@@ -97,3 +97,4 @@ pd.concat([train_data, test_data]).to_csv("MovieSet_MODIFIED.csv", index=False)
 
 np.savez_compressed('MovieSet_MODIFIED.npz', X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
 print("--SUCCESS!--")
+
